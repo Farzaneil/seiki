@@ -1,0 +1,22 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="9">
+            <item index="0" class="java.lang.String" itemvalue="pyasn1-modules" />
+            <item index="1" class="java.lang.String" itemvalue="psycopg2" />
+            <item index="2" class="java.lang.String" itemvalue="requests_pkcs12" />
+            <item index="3" class="java.lang.String" itemvalue="slack-sdk" />
+            <item index="4" class="java.lang.String" itemvalue="datadog_api_client" />
+            <item index="5" class="java.lang.String" itemvalue="requests_futures" />
+            <item index="6" class="java.lang.String" itemvalue="jsonpath_ng" />
+            <item index="7" class="java.lang.String" itemvalue="text_unidecode" />
+            <item index="8" class="java.lang.String" itemvalue="redshift_connector" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
