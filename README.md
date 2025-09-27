@@ -34,3 +34,9 @@ Normalise l’échelle de couleurs sur toute l’animation (comparabilité tempo
 Dessine les segments (segments_template.csv) en overlay pour situer les flux.
 
 Exporte l’animation finale.
+
+
+Notes techniques
+- Le filtrage horaire est appliqué juste après le parsing, puis les timestamps sont reconstruits (ts = date_it + hour).
+- Les intensités par segment sont calculées en pré-associant les beacons proches de chaque segment (distance point-segment ≤ segment-radius) et en moyennant les counts pondérés par 1/(1+d).
+- Les échelles de couleur et l’épaisseur des segments sont normalisées globalement sur toute l’animation pour une lecture cohérente dans le temps.
