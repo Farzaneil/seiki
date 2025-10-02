@@ -85,7 +85,7 @@ Interprétation attendue du HTML
 
 
 
-🏬 Restitution — Analyse des flux visiteurs
+## 🏬 Restitution — Analyse des flux visiteurs
 Contexte
 L’étude a consisté à exploiter les données de passage collectées par les beacons du centre afin de :
 Cartographier les zones les plus fréquentées (heatmaps, densité sur les segments).
@@ -94,7 +94,7 @@ Analyser les flux verticaux entre les différents niveaux (-1, 0, 1).
 Identifier des opportunités d’optimisation de l’expérience client et des espaces.
 
 
-1️⃣ Constats clés
+### 1️⃣ Constats clés
 🔹 Fréquentation par zones
 
 Zones d’entrée / sortie très concentrées : la majorité des flux se concentre autour des accès principaux et des escalators proches des entrées.
@@ -112,7 +112,7 @@ Entrée principale (niveau 0) → escalator central → zone restauration/food c
 Parking (-1) → escalator périphérique → rez-de-chaussée commerces → sortie proche.
 Certains chemins “bouclés” autour d’ancres commerciales fortes (ex : grandes enseignes en 0 puis food court en 1).
 
-2️⃣ Opportunités & Recommandations
+### 2️⃣ Opportunités & Recommandations
 
 🛍️ Optimisation commerciale
 Valoriser les zones à fort trafic : placer promotions, pop-up stores, corners saisonniers sur les segments les plus empruntés.
@@ -132,14 +132,14 @@ Fluidifier les escalators/ascenseurs dominants (gestion des sens, affichages tem
 Répéter la mesure après mise en place d’actions pour évaluer l’efficacité (ex : +X% trafic dans une zone revalorisée).
 Intégrer des comparaisons temporelles (week-end vs semaine, saisonnalité).
 
-3️⃣ Points techniques clés (pour crédibiliser l’analyse)
+### 3️⃣ Points techniques clés (pour crédibiliser l’analyse)
 
 Heatmaps spatio-temporelles : densité des passages filtrée sur plages horaires pertinentes (10h–22h).
 Projection beacon→segments : algorithme qui répartit le trafic selon la proximité physique pour représenter les vraies allées empruntées.
 Matrice inter-étages : quantification des flux montants/descendants, part de sortie.
 Visualisations interactives (HTML & Sankey) pour exploration libre des données par vos équipes.
 
-4️⃣ Prochaines étapes proposées
+### 4️⃣ Prochaines étapes proposées
 
 Session d’exploration interactive avec les équipes du centre (utilisation du dashboard HTML pour naviguer dans les flux).
 Ateliers opérationnels :
