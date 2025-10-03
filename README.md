@@ -146,7 +146,6 @@ Filtrage temporel : créneau horaire (hour_min/hour_max) et optionnellement pér
 Création d’un timestamp ts.
 Normalisation des directions (direction_in/out → -1,0,1,outdoor).
 Option d’appliquer un mapping direction→beacon si besoin.
-
 🔎 → Résultat : trois DataFrames propres prêts pour les calculs.
 
 build_beacon_flows(b, c)
