@@ -98,10 +98,6 @@ de présentation lors de l’entretien technique.
 
 ## 🚀 Scripts & Modélisations
 
-### 1️⃣ `heatmap_evolutive.py` — GIF évolutif
-
-Permet de créer une **heatmap dynamique** ou une **animation des segments** sur une plage temporelle.
-
 **Usage :**
 1) Visualisation rapide (GIF)
 python heatmap_evolutive.py --beacons beacons_world_template.csv --segments segments_template.csv \
@@ -117,15 +113,107 @@ python heatmap_interactive.py --beacons beacons_world_template.csv --segments se
 python analyze_paths.py --beacons beacons_world_template.csv --segments segments_template.csv \
   --counts porta_di_roma_counts.csv --hour-min 10 --hour-max 22 --segment-radius 5 \
   --topk 20 --outdir analysis_out -v
+On se concentrera sur ce troisième axe :
 
+### 🔧 Fonctions utilitaires (prétraitement)
+setup_logging(v: int)
+Configure le niveau de logs (WARNING, INFO, DEBUG) selon -v.
+Permet d’avoir un retour console adapté (filtres appliqués, nb de lignes gardées…).
 
-Interprétation attendue du HTML
+read_csv_lower(path: str) -> pd.DataFrame
+Charge un CSV en forçant toutes les colonnes en minuscules.
+Sécurise la casse pour éviter les erreurs lors des jointures.
+
+to_num(df: pd.DataFrame, cols: list)
+Convertit certaines colonnes en numérique (int/float), ignore les valeurs invalides (coerce).
+Important car les CSV peuvent contenir du texte ou des NA.
+
+ensure_cols(df, need, name="df")
+Vérifie qu’un DataFrame contient les colonnes obligatoires.
+Tente de rattraper certains noms dupliqués (_x / _y après merge).
+Lève une exception explicite si des colonnes manquent.
+
+point_to_segment_distance(px, py, x1, y1, x2, y2)
+Calcule la distance minimale entre un point (px,py) et un segment (x1,y1)-(x2,y2) en 2D.
+Utilisé pour projeter la fréquentation d’un beacon sur le segment le plus proche.
+
+### 🔥 Fonctions cœur d’analyse
+load_data(...)
+Rôle : ingestion et préparation des trois sources (beacons, segments, counts).
+Lecture CSV et normalisation des noms de colonnes.
+Conversion types (floor, hour, count…).
+Filtrage temporel : créneau horaire (hour_min/hour_max) et optionnellement période de dates.
+Création d’un timestamp ts.
+Normalisation des directions (direction_in/out → -1,0,1,outdoor).
+Option d’appliquer un mapping direction→beacon si besoin.
+
+🔎 → Résultat : trois DataFrames propres prêts pour les calculs.
+
+build_beacon_flows(b, c)
+Rôle : transformer les counts beacon/date en flux par beacon.
+Associe chaque ligne à un “bucket” de destination (dst_bucket) : soit direction_out prioritaire, soit direction_in.
+Jointure avec la géométrie des beacons pour avoir (x_m, y_m, floor).
+Renvoie un DataFrame flows avec :
+ts, beacon, x_m, y_m, src_floor, dst_bucket, weight
+
+project_flows_to_segments(segments, flows, radius=5)
+Rôle : répartir le trafic sur les segments physiques.
+Deux modes automatiques :
+A — Ligne src→dst : s’il existe des coordonnées destination (x_m_dst), calcule la distance de chaque extrémité au segment.
+B — Buckets (cas actuel) : prend chaque beacon et projette son flux sur les segments de son étage selon la distance.
+⚙️ Algorithme : pondération par 1 / (1 + distance) pour répartir le poids weight.
+🔎 → Retourne un DataFrame segments + flow_load.
+
+build_inter_floor_matrix_from_buckets(flows)
+Rôle : construire une matrice de transitions entre étages.
+Agrège les poids par couple (src_floor, dst_bucket).
+Produit un tableau clair : lignes = étage d’origine, colonnes = destination (-1,0,1,outdoor).
+
+project_counts_to_segments_by_bucket(...)
+Rôle : version détaillée de project_flows_to_segments séparée par destination.
+Crée un dict {bucket: DataFrame} où chaque DataFrame donne le flow_load par segment uniquement pour les visiteurs allant vers ce bucket.
+
+top_k_segments(seg_loads, k=20)
+Classe les segments par intensité décroissante.
+Retourne le Top K segments les plus empruntés.
+
+top_k_od_beacons(flows, k=20)
+Essaie de donner les couples origine–destination (si colonnes src/dst présentes).
+Dans notre cas (buckets), renvoie un DF vide car on n’a pas de vrai beacon destination.
+
+### 📊 Génération du rapport
+make_report_html(seg_loads, topsegs, topod, inter_floor, out_html)
+- Génère un rapport interactif Plotly combiné dans une page unique :
+- Bar chart des top segments.
+- Heatmap inter-étages (flux entre niveaux / sorties).
+- Sankey des flux verticaux.
+- Table OD si dispo.
+Écrit un seul fichier report_paths.html.
+
+### ⚡ Workflow du main()
+
+Parsing arguments : chemins CSV, paramètres temporels, rayon pour projection, top K…
+Chargement + nettoyage via load_data.
+Exclusion optionnelle des ascenseurs si --exclude-elevators.
+Construction des flux via build_beacon_flows.
+Projection sur segments (global + par bucket).
+Matrice inter-étages via build_inter_floor_matrix_from_buckets.
+Exports CSV : intensité segments, buckets, top segments, matrice.
+Rapport HTML via make_report_html.
+
+### 🧩 Vision d’ensemble
+
+load_data = ingestion & nettoyage
+build_beacon_flows = transforme données brutes en flux utilisables
+project_flows_to_segments & project_counts_to_segments_by_bucket = spatialisation des flux
+build_inter_floor_matrix_from_buckets = vision agrégée verticale
+top_k_segments & make_report_html = synthèse pour restitution client
+
+### Interprétation attendue du HTML
 - Top segments : couloirs ou axes à trafic fort.
 - Matrice inter-étages : parts relatives de flux montants/descendants et vers l’extérieur.
 - Heatmaps : zones de concentration selon l’heure et la date.
 - Sankey : schéma clair des échanges entre niveaux.
-
-
 
 ## 🏬 Restitution — Analyse des flux visiteurs
 Contexte
