@@ -17,16 +17,19 @@ en Italie : Porta di Roma.
 En tant qu’Analytics Engineer de Seiki, ta mission est de proposer une solution à Perklière
 pour les aider à mieux comprendre la dynamique au sein du centre Porta di Roma. A l’issu
 de la réunion de kick off, deux problématiques se dégagent :
-• Problématique n°1 : comment modéliser les flux indoor du centre Porta di
-Roma ?
+
+• Problématique n°1 : comment modéliser les flux indoor du centre Porta di Roma ?
+
 Via le langage de programmation de ton choix, développe un algorithme capable
 de modéliser les flux dans le centre en prenant en entrée les données issues des
 beacons (cf. éléments communiqués ci-dessous). Pour cet exercice, on négligera
 les flux liés aux ascenseurs et on considérera que les beacons couvrent 100% des
 entrées/sorties ou passage à un autre niveau du centre.
+
 • Problématique n°2 : quelle restitution faire à Perklière, sachant que les
 utilisateurs sont des opérationnels qui ne connaissent pas grand-chose à la
 data ?
+
 Via le support de ton choix, propose une restitution des résultats tout en gardant
 à l’esprit que ton auditoire n’est pas technique. Ce sera notamment ton support
 de présentation lors de l’entretien technique.
