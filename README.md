@@ -43,13 +43,21 @@ Il répond à un **test technique d’Analytics Engineer** en combinant :
 ---
 
 ## 📂 Structure du projet
+
 ├── heatmap_evolutive.py # Animation GIF (heatmap ou segments) sur une période
+
 ├── heatmap_interactive.py # Visualisation interactive HTML multi-journée
+
 ├── analyze_paths.py # Analyse des flux et détection des chemins dominants
+
 ├── beacons_world_template.csv # Template beacons (id, x/y mètres, étage)
+
 ├── segments_template.csv # Template segments (x1,y1,x2,y2,floor)
+
 ├── porta_di_roma_counts.csv # Données de comptage (beacons, dates, heures, directions)
+
 ├── analysis_out # Fichiers output générés
+
 └── README.md # Documentation du projet
 
 ---
