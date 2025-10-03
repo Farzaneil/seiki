@@ -1,6 +1,35 @@
 # 🏬 SEIKI — Analyse des déplacements dans un centre commercial
 
-Ce projet fournit une chaîne complète pour analyser et visualiser les déplacements des visiteurs dans un centre commercial à partir des données de comptage de beacons.
+## Contexte
+Une célèbre foncière, que l’on appellera Perklière dans cet exercice, présente dans
+plusieurs pays européen a un pain point : elle n’a aucune connaissance quant à la
+fréquentation et comportement des visiteurs au sein de ses centres. Pour pallier cette
+problématique, Perklière décide d’équiper ses centres avec des compteurs physiques
+(appelés « beacons », cf. éléments communiqués ci-dessous). Toutefois, via ces
+capteurs et sans traitement supplémentaire, il n’est que possible d’avoir un nombre
+d’entrées et de sorties dans le centre, ce qui donne une idée de la fréquentation mais pas
+du tout du comportement des visiteurs. Perklière décide donc de contacter Seiki, expert
+en modélisation des flux, afin de trouver une solution à leur problème. Seiki et Perklière
+se mettent alors d’accord pour démarrer cette collaboration avec un POC sur un centre
+en Italie : Porta di Roma.
+
+## Mission
+En tant qu’Analytics Engineer de Seiki, ta mission est de proposer une solution à Perklière
+pour les aider à mieux comprendre la dynamique au sein du centre Porta di Roma. A l’issu
+de la réunion de kick off, deux problématiques se dégagent :
+• Problématique n°1 : comment modéliser les flux indoor du centre Porta di
+Roma ?
+Via le langage de programmation de ton choix, développe un algorithme capable
+de modéliser les flux dans le centre en prenant en entrée les données issues des
+beacons (cf. éléments communiqués ci-dessous). Pour cet exercice, on négligera
+les flux liés aux ascenseurs et on considérera que les beacons couvrent 100% des
+entrées/sorties ou passage à un autre niveau du centre.
+• Problématique n°2 : quelle restitution faire à Perklière, sachant que les
+utilisateurs sont des opérationnels qui ne connaissent pas grand-chose à la
+data ?
+Via le support de ton choix, propose une restitution des résultats tout en gardant
+à l’esprit que ton auditoire n’est pas technique. Ce sera notamment ton support
+de présentation lors de l’entretien technique.
 
 Il répond à un **test technique d’Analytics Engineer** en combinant :
 - prétraitement des données brutes (horaires, étages, directions),
