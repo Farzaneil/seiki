@@ -34,8 +34,9 @@ Via le support de ton choix, propose une restitution des résultats tout en gard
 à l’esprit que ton auditoire n’est pas technique. Ce sera notamment ton support
 de présentation lors de l’entretien technique.
 
-Il répond à un **test technique d’Analytics Engineer** en combinant :
+## Axes de travail
 - prétraitement des données brutes (horaires, étages, directions),
+- génération des fichiers input nécessaires,
 - détection des chemins les plus empruntés,
 - analyse des flux entre étages,
 - visualisation dynamique (GIF et HTML interactif).
